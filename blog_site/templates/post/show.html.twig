@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+    <article class="blog-post ms-5">
+        <h2 class="blog-post-title">{{ post.postName }}</h2>
+        <hr>
+        <p class="blog-post-meta">{{ post.dataAdd ? post.dataAdd|date('Y-m-d') : '' }} <a href="#">Тыква4000</a></p>
+        <img  src="{{ post.imagePost }}" class="border border-secondary border-1 rounded"  width="97%" alt="Card image cap" >
+        <p>Количество просмотров: {{ post.viewQuantity }} </p>
+        <hr>
+        <p>{{ post.postText|nl2br}}</p>
+
+
+{#       <div class=" row g-2 mb-3">
+            <div class="col-10">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            </div>
+            <div class="col-2">
+                <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <p>Отправка сообщения временно недоступна!!!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Отправить</a>
+
+            </div>
+        </div>
+
+        {% for comment in comments %}
+            {% if comment.post == post %}
+                {% for user in users %}
+                    {% if comment.user == user and comment.comment_status =='1' %}
+                        <div class="d-flex bg-light pt-3 shadow p-3">
+                            <div class="col-10 mb-0 small lh-sm border-bottom" style="margin-left: 10px">
+                                <a href="{{ path('app_user_show', {'id': user.id}) }}" class="text-decoration-none text-dark fs-6"><strong class="d-block text-gray-dark">@{{ user.username }} </strong></a>
+                                <p class="mb-0"><small class="text-muted"> {{ comment.data_add_comment ? post.dataAdd|date('Y-m-d H:m') : '' }}</small></p>
+                                <p class="fs-6">
+                                    {{ comment.comment_text}}
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}#}
+
+    </article>
+
+{% endblock %}

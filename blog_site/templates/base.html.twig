@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!--логотип-->
+
+            <a href="{{ path('app_index') }}" class="navbar-brand ms-5 me-5 ">
+                <h1>ПРОСТО<br>БЛОГ</h1>
+            </a>
+
+
+            <!--кнопка-->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-10">
+
+                    <li class="nav-item">
+                        <a href="" class="nav-link">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">Главная</a>
+                    </li>
+                    <form action="" class="d-flex">
+                        <input type="search" placeholder="" class="form-control me-2">
+                        <button type="button" class="btn btn-outline-success">поиск</button>
+                    </form>
+                </ul>
+                {% if app.user %}
+                <div class="d-flex">
+                    <div class="nav d-flex col-12 col-lg-auto justify-content-center mb-2 mb-lg-0">
+                        <a href="{{ path('app_post_new') }}" class="m-auto">
+                            <button type="button" class="btn btn-outline-secondary btn-space me-2" >Создать пост</button>
+                        </a>
+                    </div>
+                    {% if is_granted('ROLE_ADMIN')  %}
+                        <a href="/admin" class="m-auto">
+                            <button type="button" class="btn btn-outline-secondary btn-space me-2" >Административная панель</button>
+                        </a>
+                    {% endif %}
+                </div>
+                    <div class="text-end">
+                        <div class="col-auto">
+                            <a href="{{ path('app_logout') }}">
+                                <button type="button" class="btn btn-outline-secondary btn-space" >Выйти</button>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                <nav class="navbar navbar-light bg-light">
+                    <form class="container-fluid justify-content-start d-flex">
+                        <a href=" {{ path('app_login') }}">
+                            <button class="btn btn-outline-secondary btn-space me-2" type="button">Вход</button>
+                        </a>
+                        <a href="{{ path('app_register') }}">
+                            <button class="btn btn-outline-secondary btn-space" type="button">Регистрация</button>
+                        </a>
+                    </form>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+
+    </nav>
+        {% block body %}{% endblock %}
+
+    <footer class="text-center py-3 my-4" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-dark" href="https://google.com/">ProstoBlog</a>
+    </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>

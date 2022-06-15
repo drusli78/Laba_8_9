@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+<main class="container">
+
+
+
+    <!-- посты -->
+    <div class="row mb-2">
+        {% for post in posts %}
+            <div class="col-md-6">
+                <div class=" card supercard123 row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-100 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <span class="border border-secondary border-1 rounded">
+                            <img src="{{ post.imagePost }}" class="rounded card-img-top" style="object-fit: cover; object-position: center; height: 26vw;" alt="Card image cap">
+                        </span>
+                        <strong class="d-inline-block mb-2 text-primary">Дима221</strong>
+
+                        <h3 class="mb-0">{{ post.postName }}</h3>
+                        <p class="card-text mb-auto">{{ post.annotation }}</p>
+                        <a href="{{ path('app_post_show', {'id': post.id}) }}" class="stretched-link">продолжить чтение...</a>
+                        <div class="mb-1 text-muted">{{ post.dataAdd ? post.dataAdd|date('Y-m-d') : '' }}</div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <tr>
+                <td colspan="8">ничего не найдено</td>
+            </tr>
+        {% endfor %}
+    </div>
+
+{% endblock %}
